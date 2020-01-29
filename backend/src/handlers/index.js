@@ -1,4 +1,6 @@
-const { authenticate } = require('./authenticate')
 const { addUser } = require('./addUser')
+const { authenticate } = require('./authenticate')
+const { getAbsoluteHours } = require('./getAbsoluteHours')
+const { getMediumHours } = require('./getMediumHours')
 
-module.exports = { authenticate, addUser }
+module.exports = { addUser, authenticate, getAbsoluteHours, getMediumHours }
