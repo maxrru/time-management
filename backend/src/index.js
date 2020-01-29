@@ -1,7 +1,8 @@
-const cors = require('cors')
+// const cors = require('cors')
+const express = require('express')
 const bodyParser = require('body-parser')
 const { checkToken } = require('./middlewares')
-const { authenticate, addUser } = require('./handlers')
+const { authenticate, addUser, getAbsoluteHours, getMediumHours } = require('./handlers')
 
 // Starting point of the server
 const main = () => {
@@ -9,7 +10,7 @@ const main = () => {
   const port = process.env.PORT || 10000
 
   app.use(bodyParser.json())
-  app.use(cors())
+  // app.use(cors())
   app.use(bodyParser.urlencoded({ // Middleware
     extended: true,
   }))
@@ -24,11 +25,11 @@ const main = () => {
   app.post('/v1/addUser', addUser)
   app.post('/v1/authenticate', authenticate)
 
+  app.get('/v1/getMediumHours/:startDate/:endDate/', getMediumHours)
+  app.get('/v1/getAbsoluteHours/:startDate/:endDate/', getAbsoluteHours)
+
   // app.post('/v1/addStartDate', checkToken, addStartDate)
   // app.post('/v1/addEndDate', checkToken, addEndDate)
-
-  // app.get('/v1/getWorkingHours', checkToken, getWorkingHours)
-  // app.get('/v1/getMediumWorkingHours', checkToken, getMediumWorkingHours)
 
   app.listen(port, () => console.log(`Server is listening on port: ${port}`))
 }
